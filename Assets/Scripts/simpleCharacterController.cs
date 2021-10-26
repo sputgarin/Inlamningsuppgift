@@ -48,6 +48,7 @@ public class simpleCharacterController : MonoBehaviour
     // A Layermask that will keep track of object with the layerMask ground.
     public LayerMask ground;
 
+ 
     // Start is called before the first frame update
     void Start()
     {
@@ -173,10 +174,11 @@ public class simpleCharacterController : MonoBehaviour
 
             // Disable the character controller so the player can't move.
             GetComponent<simpleCharacterController>().enabled = false;
-            
+
         }
         
-      
+
+
 
     }
 
@@ -205,8 +207,10 @@ public class simpleCharacterController : MonoBehaviour
         }
     }
 
+ 
+
     // Function to check is the player is grounded.
-     public bool isGrounded()
+    public bool isGrounded()
     {
         // creates a sphere at the characters feet, if the sphere is touching the ground the player is grounded.
         return Physics.CheckSphere(groundCheck.position, 0.05f, ground);
