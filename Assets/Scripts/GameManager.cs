@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     
     public static GameManager instance;
 
+    // Creates a player gameobject the player is connected to in unity.
     public GameObject player;
 
     // Gameobject that hold the lives(hearts) of the player.
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviour
     // Point variable for point system. I don't think i will implement the point system.
     int score = 0;
 
+    // A text object to hold the amounts of points the character have.
     public Text pointsNumberText;
 
     private void Awake()
@@ -82,23 +84,27 @@ public class GameManager : MonoBehaviour
     // Game over function.
     public void GameOver()
     {               
+        // shows the gameover gui to the player
         gameOverPanel.SetActive(true);
         print("GameOver()");
 
     }
 
+    // Goal function to check if the player has reached the goal.
     public void Goal()
     {
+        // Show the goal GUI to the player.
         goalPanel.SetActive(true);
 
     }
     // Testing score system
     public void IncrementScore()
     {
-       
+       // Increase score with 10 points
         score += 10;
         Debug.Log(score);
 
+        // Takes the int and converts it to a string so is can be shown in the GUI.
         pointsNumberText.text = score.ToString();
 
 
@@ -114,6 +120,7 @@ public class GameManager : MonoBehaviour
 
     public void NextLevel()
     {
+        // If you have completed the level move to the next level in the buildIndex.
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
     }
 
