@@ -1,4 +1,3 @@
-using Assets.Scripts;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,9 +18,6 @@ public class simpleCharacterController : MonoBehaviour
 
     // get the gameobject called scriptcontainer so the charactercontroller script can talk to the Gamemanager script in the scriptcontainer.
     public GameObject scriptContainer;
-
-    // Testing scripts that are not in the scene but can be called from without monobehavior.
-    public HelloFunction hellofunction;
 
     // Set character speed;
     public float speed = 5.0f;
@@ -63,12 +59,7 @@ public class simpleCharacterController : MonoBehaviour
         anim = this.GetComponent<Animator>();
 
         // Grabbing the Rigidbody component from the game object this script is attached to.
-        rb = GetComponent<Rigidbody>();
-
-        // stores the HelloFunction into a variable called hellofunction
-        hellofunction = new HelloFunction();
-
-       
+        rb = GetComponent<Rigidbody>();    
     }
 
     // Move function that takes the direction and puts 5 into speed
@@ -106,12 +97,8 @@ public class simpleCharacterController : MonoBehaviour
         {
             // Run the move function with the Forward direction enum.
             Move((int)Direction.Forward);
-
-            // calling my other script hellofunction with the function Msg to see if it can print to screen.
-            hellofunction.Msg();
-
-
         }
+
         // If the player is moving backwards.
         else if (translation < 0)
         {
@@ -230,40 +217,5 @@ public class simpleCharacterController : MonoBehaviour
     }
 
 
-    /* scrapped for now, might implement later.
-
-
-   Fungerar inte... den sätter på rootmotion för tidigt (mid jump) med denna if satsen, och ibland så tar den inte bort root motion när man hoppar. 
-
-       else if (isGrounded() == true)
-   {
-       anim.applyRootMotion = true;
-   }
-
-   */
-
-    /* if (Input.GetButtonDown("Fire3"))
-     {
-
-     anim.SetBool("isRunning", false);
-     anim.SetBool("isWalking", true);
-     Debug.Log("pressing shift");
-
-
-     }
- if (Input.GetButtonUp("Fire3"))
- {
-     anim.SetBool("isWalking", false);
-     Debug.Log("pressing shift");
-
-
- }
-
-    // Tested removing root motion because the jump motion did not work with it turned on.
-             But i could not get rootmotion to be added again at a proper time, causing alot of animation bugs.
-            //so i scrapped this for now and just kept root motion off at all time.
-            // anim.applyRootMotion = false;
-
-    */
 
 }
