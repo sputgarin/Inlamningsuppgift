@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     // Max hastigheten karaktären kan röra sig.
     public float maxForwardSpeed = 8f;
 
+    public float turnSpeed = 100;
+
     // hastigheten som vi försöker få vår karaktär till.
     float desiredSpeed;
 
@@ -45,10 +47,12 @@ public class PlayerController : MonoBehaviour
     {
         // När callbacken kommer från knapptryckningen så sparar vi det nya vector2 värdet i moveDirection. 
         moveDirection = context.ReadValue<Vector2>();
+       
     }
 
     void Move(Vector2 direction)
     {
+        float turnAmount = direction.x;
         float fDirection = direction.y;
 
         // här tar vi ett input värde av outputten Vector2 direction, detta invärde används sedan för att translate(flytta karaktären)
@@ -65,17 +69,12 @@ public class PlayerController : MonoBehaviour
         desiredSpeed = direction.magnitude * maxForwardSpeed * Mathf.Sign(fDirection);
         float acceleration = isMoveInput ? groundAccel : groundDecel;
 
-        if (isMoveInput)
-        {
-            acceleration = groundAccel;
-        }
-        else
-        {
-            acceleration = groundDecel;
-        }
+       
 
         forwardSpeed = Mathf.MoveTowards(forwardSpeed, desiredSpeed, acceleration * Time.deltaTime);
         anim.SetFloat("ForwardSpeed", forwardSpeed);
+
+        transform.Rotate(0, turnAmount * turnSpeed * Time.deltaTime, 0);
 
     }
 
@@ -93,6 +92,7 @@ public class PlayerController : MonoBehaviour
     {
         // här kör vi Move funktionen vi skapade med vector2 move direction som input värde. denna ligger i update för den ska köra varje fps.
         Move(moveDirection);
+        Debug.Log(forwardSpeed);
     }
 
   
